@@ -24,8 +24,7 @@ class Wiker:
     def summary(self, req_text):
         self.params['titles'] = req_text
         response = requests.get(self.url, params=self.params).json()
-        txt = str(response['query']['pages'].keys()).split("'")[1]
-        return response['query']['pages'][txt]['extract']
+        return response['query']['pages'][str(response['query']['pages'].keys()).split("'")[1]]['extract']
 
 wiki = Wiker(lang='uz')
 print(wiki.summary("Telegram"))
