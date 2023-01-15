@@ -26,6 +26,28 @@ def tag_remover(text: str):
     return cleantext
 
 
+def make_dirs():
+    data_path = os.getcwd() + '/data'
+    extra_path = os.getcwd() + '/extra'
+
+    if os.path.exists(data_path):
+        pass
+    else:
+        os.mkdir(data_path)
+
+    if os.path.exists(extra_path):
+        f = open(extra_path + '/pre_urls.txt', 'w')
+        f.close()
+        f = open(extra_path + '/post_urls.txt', 'w')
+        f.close()
+    else:
+        os.mkdir(extra_path)
+        f = open(extra_path + '/pre_urls.txt', 'w')
+        f.close()
+        f = open(extra_path + '/post_urls.txt', 'w')
+        f.close()
+
+        
 class Wiker:
     """
     Class for wikipedia dataset collection
@@ -158,5 +180,6 @@ class Wiker:
         return jobs
 
     def run(self, scrape_limit):
+        make_dirs()
         while self.dir_scanner() < scrape_limit:
             self.worker()
