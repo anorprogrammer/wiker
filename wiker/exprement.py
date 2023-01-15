@@ -20,6 +20,12 @@ class Wiker:
         for i in range(len(response[1])):
             result.append({'title': response[1][i], 'url': response[3][i]})
         return result
+    
+    def summary(self, req_text):
+        self.params['titles'] = req_text
+        response = requests.get(self.url, params=self.params).json()
+        txt = str(response['query']['pages'].keys()).split("'")[1]
+        return response['query']['pages'][txt]['extract']
 
 wiki = Wiker(lang='uz')
-print(wiki.search("Turkiston"))
+print(wiki.summary("Telegram"))
