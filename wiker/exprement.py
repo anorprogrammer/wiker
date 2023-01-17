@@ -29,7 +29,7 @@ class Wiker:
         response = requests.get(self.url, params=self.params).json()
         try:
             # so'ralgan mavzu bo'yicha maqola topilsa, maqola matni qaytadi
-            return response['query']['pages'][str(response['query']['pages'].keys()).split("'")[1]]['extract']
+            return list(response["query"]["pages"].values())[0]["extract"]
         except:
             # so'ralgan mavzu to'pilmasa None qiymat qaytadi
             return None
